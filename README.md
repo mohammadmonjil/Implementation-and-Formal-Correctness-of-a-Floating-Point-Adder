@@ -16,7 +16,7 @@ Correctness is proven by connecting the implementation with rational arithmetic 
 
 The source files are in the `src/` folder. Run them in ACL2 (tested in ACL2 8.6) in the following order:
 
-1. `fp.lisp`  
+1. `fp.lisp`  (contains the adder and other functions)
 2. `book-1.lisp`  
 3. `book-2.lisp`  
 4. `book-3.lisp`  

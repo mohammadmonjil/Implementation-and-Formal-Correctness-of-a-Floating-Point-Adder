@@ -43,10 +43,10 @@ A floating-point number consists of three fields:
   - Represents the significant digits of the number.  
   - Normalized numbers assume an implicit leading 1 before the binary point.  
 
-The value of a floating point number is given by:  
+The value of a floating point number is:  
 `Value = (-1)^S * (1.F) * 2^(E - Bias)`
 
-The number 0 is represented by putting 0 in both exponent and mantissa.
+Zero is represented by putting 0 in both exponent and mantissa.
 
 ---
 
@@ -109,17 +109,34 @@ To relate bitvector operations to real arithmetic, two rational interpretation f
 
 ## Intermediate Theorems
 
-1. Rational_Normalized(F) = Rational_Denormalized(Denormalization(F))  
+1. **Denormalization correctness**  
+   Rational_Normalized(F) = Rational_Denormalized(Denormalization(F))  
    *Denormalization preserves value.*  
 
-2. Rational_Denormalized(Sign, RightShift(Mantissa, n), Exponent)  
+2. **Right-shift semantics**  
+   Rational_Denormalized(Sign, RightShift(Mantissa, n), Exponent)  
    = Rational_Denormalized(Sign, Mantissa, Exponent) / 2^n  
    *Right-shifting corresponds to division by a power of two.*  
 
-3. Rational_Denormalized(F) = Rational_Normalized(Normalization(F))  
+3. **Signed add/sub correctness**  
+   Rational_Denormalized(Signed_BitVector_Adder(SignA, MantissaA, SignB, MantissaB), Exponent)  
+   = Rational_Denormalized(SignA, MantissaA, Exponent) + Rational_Denormalized(SignB, MantissaB, Exponent)  
+   *The signed bitvector adder corresponds exactly to rational addition when exponents are aligned.*  
+
+4. **Normalization invariance**  
+   Rational_Denormalized(F) = Rational_Normalized(Normalization(F))  
    *Normalization preserves value.*  
 
-These theorems show that each low-level operation (denormalization, shifting, normalization) preserves the intended rational semantics, which is essential to proving the correctness of the full adder.
+---
+
+## How the Theorems Compose
+
+- The input floats are first turned into Rational_Denormalized form using theorem (1).  
+- Exponent alignment is justified by theorem (2).  
+- Mantissa addition is justified by theorem (3).  
+- Result normalization is justified by theorem (4).  
+
+Chaining these steps together proves that the rational semantics of the FP-Adder matches real addition.
 
 ---
 
@@ -131,4 +148,3 @@ Rational_Normalized(FP_Adder(A, B))
 = Rational_Normalized(A) + Rational_Normalized(B)
 
 ---
-

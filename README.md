@@ -2,13 +2,13 @@
 
 ## Summary
 
-This project implements a **primitive floating point adder** for two IEEE-754 floating point numbers and formally proves its correctness in **ACL2 (version 8.6)**.  
+This project implements a **primitive floating point adder** for two IEEE-754 floating point numbers and formally proves its correctness in **ACL2 (version 8.6)**. I implemented this project to learn theorem proving under the guidance of Dr. Sandip Ray at University of Florida. 
 The adder supports addition of numbers represented in sign–magnitude exponent form and bitvector mantissas.  
 Correctness is proven by connecting the implementation with rational arithmetic through intermediate theorems.  
 
 **Limitations:**  
 - Lossless semantics only (no rounding modeled).  
-- Overflow/underflow are not fully addressed.  
+- Modified IEEE format 
 
 ---
 

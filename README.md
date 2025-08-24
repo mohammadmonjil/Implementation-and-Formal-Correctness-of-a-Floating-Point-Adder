@@ -53,8 +53,8 @@ Zero is represented by putting 0 in both exponent and mantissa.
 ## Modifications in This Implementation
 
 - Exponent is stored as a bitvector `[sign][magnitude]` instead of biased form.  
-- Zero is represented as `[1][zero-vector]`.  
-- Sign and mantissa are both represented as bitvectors.  
+- Zero is represented as `[1][zero-vector]` in the exponent, value of mantissa is ignored.  
+
 
 ---
 

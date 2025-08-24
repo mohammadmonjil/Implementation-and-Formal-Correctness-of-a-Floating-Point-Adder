@@ -119,7 +119,8 @@ $RationalDeNormalized(S, M, E) = (-1)^S \times \Big(M_0 \cdot 2^{0} + \sum_{i=1}
 **Rational_Denormalized**: works on denormalized mantissas (with the hidden 1 restored explicitly).  
 
 ## Intermediate Theorems
-To prove the correctness of the floating point adder, a number of intermediate theorems relating to different operations of the algoritms were proved.
+To prove the correctness of the floating point adder, a number of intermediate theorems relating to different operations of the algoritms were proved. The major theorems are as follows:
+
 1. **Denormalization correctness**
 ```
    Rational_Normalized(S,M,E) = Rational_Denormalized(Denormalization(S,M,E))  
@@ -136,14 +137,14 @@ Denormalization preserves the rational value represented by floating point numbe
 ```
    Right-shifting corresponds to division by a power of two. Left-shifting does not change the value. 
 
-5. **Signed add/sub correctness**
+3. **Signed add/sub correctness**
 ```
    Rational_Denormalized(Signed_BitVector_Adder(SignA, MantissaA, SignB, MantissaB), Exponent)  
    = Rational_Denormalized(SignA, MantissaA, Exponent) + Rational_Denormalized(SignB, MantissaB, Exponent)
 ```
    The signed bitvector adder corresponds exactly to rational addition when exponents are aligned(or they have same exponent).  
 
-7. **Normalization invariance**
+4. **Normalization invariance**
 ```
    Rational_Denormalized(F) = Rational_Normalized(Normalization(F))
 ```

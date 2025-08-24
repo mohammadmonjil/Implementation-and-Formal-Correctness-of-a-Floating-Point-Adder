@@ -91,15 +91,15 @@ LeftShift adds traling zeros and RightShift adds leading zeros to the bitvector 
 
 3. **Signed BitVector Addition**
    ```
-       If signs are the same → add the mantissas.  
+       SignC, MantissaC = SignedBitVectorAdder(SignA, MantissaA, SignB, MantissaB)
+       If signs are the same → add the mantissas and return the sign.  
        If signs differ → subtract smaller from larger and keep the sign of the larger.  
        If the result is zero → return canonical zero (ExpC = [1][zero-vector]).
    ```
 
 5. **Normalization**
 ``` 
-       Ensure the mantissa has a leading 1.   
-       Adjust the exponent accordingly.
+       Ensure the mantissa has a leading 1 and adjust the exponent accordingly.
        example: If Mantissa  = 0.00101, exp = 5 (in decimal), this is same as 1.01, exp = 2. After normalization step, Mantissa = 01 (leading 1 hidden), exp = 2
 ```
 7. **Pack Result**  
@@ -121,7 +121,7 @@ $RationalDeNormalized(S, M, E) = (-1)^S \times \Big(M_0 \cdot 2^{0} + \sum_{i=1}
 ## Intermediate Theorems
 To prove the correctness of the floating point adder, a number of intermediate theorems relating to different operations of the algoritms were proved. The major theorems are as follows:
 
-1. **Denormalization correctness**
+1. **Denormalization Invariance**
 ```
    Rational_Normalized(S,M,E) = Rational_Denormalized(Denormalization(S,M,E))  
 ```
